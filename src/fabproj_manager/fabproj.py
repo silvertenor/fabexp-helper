@@ -18,10 +18,12 @@ def create_project(command, name):
             f"Do you want to add a new project titled {name} in the current working directory? (yes/no) "
         )
         if confirmation == "yes":
-            os.makedirs(os.path.join(cwd, "upload"), exist_ok=True)
-            os.makedirs(os.path.join(cwd, "download"), exist_ok=True)
-            os.makedirs(os.path.join(cwd, "include/img"), exist_ok=True)
-            shutil.copy(os.path.join(dirname,'modules/img/fabric_logo.png'), './include/img/fabric_logo.png')
+            rootdir = os.path.join(cwd, name)
+            os.makedirs(rootdir)
+            os.makedirs(os.path.join(rootdir, "upload"))
+            os.makedirs(os.path.join(rootdir, "download"))
+            os.makedirs(os.path.join(rootdir, "include/img"))
+            shutil.copy(os.path.join(dirname,'modules/img/fabric_logo.png'), os.path.join(rootdir, 'include/img/fabric_logo.png'))
             ipyCreate.create_fab_notebook(name)
 
 
