@@ -1,5 +1,5 @@
 # cli.py
-import click, os, sys
+import click, os, sys, shutil
 dirname = os.path.dirname(__file__)
 sys.path.append(dirname)
 import modules.ipyCreate as ipyCreate
@@ -20,6 +20,8 @@ def create_project(command, name):
         if confirmation == "yes":
             os.makedirs(os.path.join(dirname, "upload"), exist_ok=True)
             os.makedirs(os.path.join(dirname, "download"), exist_ok=True)
+            os.makedirs(os.path.join(dirname, "include"), exist_ok=True)
+            shutil.copy('./modules/img/fabric_logo.png', './include/img/fabric_logo.png')
             ipyCreate.create_fab_notebook(name)
 
 

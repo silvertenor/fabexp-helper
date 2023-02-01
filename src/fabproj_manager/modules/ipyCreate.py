@@ -9,7 +9,7 @@ nb = nbf.v4.new_notebook()
 def create_fab_notebook(name):
     text = [
         f"""\
-<img src="./img/fabric_logo.png" width="500"/>
+<img src="./include/img/fabric_logo.png" width="500"/>
 
 # {name}
 ```
