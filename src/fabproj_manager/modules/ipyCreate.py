@@ -6,7 +6,7 @@ from getpass import getuser
 nb = nbf.v4.new_notebook()
 
 
-def create_fab_notebook(name):
+def create_fab_notebook(name, path):
     text = [
         f"""\
 <img src="./include/img/fabric_logo.png" width="500"/>
@@ -37,4 +37,4 @@ except Exception as e:
 
     nb["cells"] = [nbf.v4.new_markdown_cell(text[0]), nbf.v4.new_code_cell(code)]
 
-    nbf.write(nb, "test.ipynb")
+    nbf.write(nb, path + '/test.ipynb')

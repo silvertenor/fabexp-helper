@@ -24,7 +24,7 @@ def create_project(command, name):
             os.makedirs(os.path.join(rootdir, "download"))
             os.makedirs(os.path.join(rootdir, "include/img"))
             shutil.copy(os.path.join(dirname,'modules/img/fabric_logo.png'), os.path.join(rootdir, 'include/img/fabric_logo.png'))
-            ipyCreate.create_fab_notebook(name)
+            ipyCreate.create_fab_notebook(name, rootdir)
 
 
 if __name__ == "__main__":
