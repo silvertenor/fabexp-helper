@@ -37,4 +37,4 @@ except Exception as e:
 
     nb["cells"] = [nbf.v4.new_markdown_cell(text[0]), nbf.v4.new_code_cell(code)]
 
-    nbf.write(nb, path + '/test.ipynb')
+    nbf.write(nb, path + f'/{name.lower()}.ipynb')
