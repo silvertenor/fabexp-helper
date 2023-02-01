@@ -21,7 +21,7 @@ def create_project(command, name):
             os.makedirs(os.path.join(cwd, "upload"), exist_ok=True)
             os.makedirs(os.path.join(cwd, "download"), exist_ok=True)
             os.makedirs(os.path.join(cwd, "include"), exist_ok=True)
-            shutil.copy('/modules/img/fabric_logo.png', './include/img/fabric_logo.png')
+            shutil.copy(os.path.join(dirname,'modules/img/fabric_logo.png'), './include/img/fabric_logo.png')
             ipyCreate.create_fab_notebook(name)
 
 
