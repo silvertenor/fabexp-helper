@@ -22,7 +22,7 @@ Clemson University
 
 <div style="page-break-after: always; visibility: hidden"> 
 \pagebreak 
-</div>"""
+</div>""",
     ]
 
     code = [
@@ -50,19 +50,3 @@ for item in os.scandir(os.path.join(os.getcwd(), 'logs')):
     ]
 
     nbf.write(nb, path + f"/{name.lower()}.ipynb")
-
-
-def update_fab_notebook(path):
-    for item in os.scandir(path):
-        if ".ipynb" in item.path and ".ipynb_checkpoints" not in item.path:
-            itemPath = item.path
-    code = """\
-# Clean up log directory to avoid large files
-import os
-for item in os.scandir(os.path.join(os.getcwd(), 'logs')):
-    if '.' != item.name[0]:
-        os.remove(item.path)"""
-    nb = nbf.read(itemPath, as_version=4)
-    nb["cells"].insert(2, nbf.v4.new_code_cell(code))
-
-    nbf.write(nb, itemPath)

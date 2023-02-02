@@ -11,9 +11,9 @@ cwd = os.getcwd()
 @click.command()
 # @click.argument("command")
 @click.option("--add", "-a", is_flag=True, help="Creates a new project")
-@click.option(
-    "--update", "-u", is_flag=True, help="Update current project (must be in directory)"
-)
+# @click.option(
+#     "--update", "-u", is_flag=True, help="Update current project (must be in directory)"
+# )
 @click.option(
     "--name",
     "-n",
@@ -24,7 +24,7 @@ cwd = os.getcwd()
 @click.option(
     "--local", "-l", is_flag=True, help="Whether project will need local scripts or not"
 )
-def create_project(add, update, name, local):
+def create_project(add, name, local):
     """
     This tool will help you create new fabric project templates, including
     directory structure.
@@ -49,10 +49,10 @@ def create_project(add, update, name, local):
             )
             ipyCreate.create_fab_notebook(name, rootdir)
 
-    # USE SPARINGLY
-    elif update:
-        rootdir = os.getcwd()
-        ipyCreate.update_fab_notebook(rootdir)
+    # # USE SPARINGLY
+    # elif update:
+    #     rootdir = os.getcwd()
+    #     ipyCreate.update_fab_notebook(rootdir)
 
 
 if __name__ == "__main__":
