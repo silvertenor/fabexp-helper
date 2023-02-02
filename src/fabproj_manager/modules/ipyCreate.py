@@ -1,4 +1,4 @@
-import nbformat as nbf
+import nbformat as nbf, os
 from datetime import date
 from getpass import getuser
 
@@ -25,7 +25,8 @@ Clemson University
 </div>"""
     ]
 
-    code = """\
+    code = [
+        """\
 from fabrictestbed_extensions.fablib.fablib import FablibManager as fablib_manager
 
 try:
@@ -33,8 +34,35 @@ try:
                      
     fablib.show_config()
 except Exception as e:
-    print(f"Exception: {e}")"""
+    print(f"Exception: {e}")""",
+        """\
+# Clean up log directory to avoid large files
+import os
+for item in os.scandir(os.path.join(os.getcwd(), 'logs')):
+    if '.' != item.name[0]:
+        os.remove(item.path)""",
+    ]
 
-    nb["cells"] = [nbf.v4.new_markdown_cell(text[0]), nbf.v4.new_code_cell(code)]
+    nb["cells"] = [
+        nbf.v4.new_markdown_cell(text[0]),
+        nbf.v4.new_code_cell(code[0]),
+        nbf.v4.new_code_cell(code[1]),
+    ]
 
-    nbf.write(nb, path + f'/{name.lower()}.ipynb')
+    nbf.write(nb, path + f"/{name.lower()}.ipynb")
+
+
+def update_fab_notebook(path):
+    for item in os.scandir(path):
+        if ".ipynb" in item.path and ".ipynb_checkpoints" not in item.path:
+            itemPath = item.path
+    code = """\
+# Clean up log directory to avoid large files
+import os
+for item in os.scandir(os.path.join(os.getcwd(), 'logs')):
+    if '.' != item.name[0]:
+        os.remove(item.path)"""
+    nb = nbf.read(itemPath, as_version=4)
+    nb["cells"].insert(2, nbf.v4.new_code_cell(code))
+
+    nbf.write(nb, itemPath)
