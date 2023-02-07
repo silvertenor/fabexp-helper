@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "fabexp_helper"
-version = "0.0.1"
+version = "0.0.3"
 description = "A tool to help create and manage fabric experiments"
 authors = ["Devin Lane <silvertenor@icloud.com>"]
 readme = "README.md"

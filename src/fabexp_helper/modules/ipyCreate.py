@@ -1,4 +1,4 @@
-import nbformat as nbf, os, shutil
+import nbformat as nbf, os, shutil, ntpath
 from datetime import date
 from getpass import getuser
 
@@ -59,7 +59,15 @@ for item in os.scandir(os.path.join(os.getcwd(), 'logs')):
     template_path = os.path.join(dirname, f"templates/{from_template}")
     # If from_template specified
     if not os.path.exists(template_path):
-        print("Error: Incorrect usage of -f. Make sure template name is valid.")
+        # Check if user entered a full path
+        if os.path.exists(from_template):
+            name = ntpath.basename(from_template)
+            shutil.copy(from_template, os.path.join(rootdir, name))
+        # Check if user entered local path
+        elif os.path.exists(path := os.path.join(os.getcwd(), from_template)):
+            shutil.copy(path, os.path.join(rootdir, from_template))
+        else:
+            print("Error: Incorrect usage of -f. Make sure template name is valid.")
         return
 
     # Iterate through items in case subfolders/more than one file exists
