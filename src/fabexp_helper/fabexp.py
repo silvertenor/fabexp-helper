@@ -49,21 +49,21 @@ def create_project(add, name, local, from_template):
         if confirmation == "yes":
             # Get root directory of PROJECT called name
             rootdir = os.path.join(cwd, name)
-
-            # Check to see if user entered anything invalid
-            template_path = os.path.join(
-                dirname, "modules/", f"templates/{from_template}"
-            )
-            if not os.path.exists(template_path):
-                # Check if user entered a full path
-                if not (
-                    os.path.exists(from_template)
-                    or os.path.exists(os.path.join(os.getcwd(), from_template))
-                ):
-                    print(
-                        "Error: Incorrect usage of -f. Make sure template name is valid."
-                    )
-                    exit()
+            if from_template:
+                # Check to see if user entered anything invalid
+                template_path = os.path.join(
+                    dirname, "modules/", f"templates/{from_template}"
+                )
+                if not os.path.exists(template_path):
+                    # Check if user entered a full path
+                    if not (
+                        os.path.exists(from_template)
+                        or os.path.exists(os.path.join(os.getcwd(), from_template))
+                    ):
+                        print(
+                            "Error: Incorrect usage of -f. Make sure template name is valid."
+                        )
+                        exit()
             # Create directories - these are default
             os.makedirs(rootdir)
             os.makedirs(os.path.join(rootdir, "upload"))
